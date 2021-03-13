@@ -28,7 +28,8 @@
             "aot": true,
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": ["src/styles.scss"],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": ["zen-observable", "graphql-tag"]
           },
           "configurations": {
             "production": {
