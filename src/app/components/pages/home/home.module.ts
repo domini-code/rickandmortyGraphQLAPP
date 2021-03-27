@@ -1,3 +1,4 @@
+import { CharactersCardModule } from '@characters/characters-card/characters-card.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -9,7 +10,8 @@ import { HomeComponent } from './home.component';
   declarations: [HomeComponent],
   imports: [
     CommonModule,
-    HomeRoutingModule
+    HomeRoutingModule,
+    CharactersCardModule
   ]
 })
 export class HomeModule { }

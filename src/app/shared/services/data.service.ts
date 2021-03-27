@@ -5,6 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 import { take, tap } from 'rxjs/operators';
 import { Character, DataResponse, Episode } from '../interfaces/data.interface';
 
+import { LocalStorageService } from '@shared/services/localStorage.service';
 const QUERY = gql`
  {
   episodes {
@@ -35,7 +36,7 @@ export class DataService {
   private charactersSubject = new BehaviorSubject<Character[]>(null);
   characters$ = this.charactersSubject.asObservable();
 
-  constructor(private apollo: Apollo) {
+  constructor(private apollo: Apollo, private localStorageSvc: LocalStorageService) {
     this.getDataAPI();
   }
 
@@ -47,9 +48,19 @@ export class DataService {
       take(1),
       tap(({ data }) => {
         const { characters, episodes } = data;
-        this.charactersSubject.next(characters.results);
         this.episodesSubject.next(episodes.results);
+        this.parseCharactersData(characters.results);
       })
     ).subscribe();
+  }
+
+
+  private parseCharactersData(characters: Character[]): void {
+    const currentFavs = this.localStorageSvc.getFavoritesCharacters();
+    const newData = characters.map(character => {
+      const found = !!currentFavs.find((fav: Character) => fav.id === character.id);
+      return { ...character, isFavorite: found };
+    });
+    this.charactersSubject.next(newData);
   }
 }

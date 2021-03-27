@@ -1,3 +1,4 @@
+import { LocalStorageService } from './../../../../shared/services/localStorage.service';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Character } from '@app/shared/interfaces/data.interface';
 
@@ -10,6 +11,7 @@ import { Character } from '@app/shared/interfaces/data.interface';
 export class CharactersCardComponent {
   @Input() character: Character;
 
+  constructor(private localStorageSvc: LocalStorageService) { }
   getIcon(): string {
     return this.character.isFavorite ? 'heart-solid.svg' : 'heart.svg';
   }
@@ -18,6 +20,7 @@ export class CharactersCardComponent {
     const isFavorite = this.character.isFavorite;
     this.getIcon();
     this.character.isFavorite = !isFavorite;
+    this.localStorageSvc.addOrRemoveFavorite(this.character);
   }
 
 }
