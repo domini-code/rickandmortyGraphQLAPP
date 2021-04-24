@@ -17,7 +17,7 @@ import { SpinnerIntercepor } from '@shared/interceptors/spinner.interceptor';
     AppComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     GraphQLModule,
     HttpClientModule,
