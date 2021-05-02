@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/member-ordering */
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
-import { BehaviorSubject } from 'rxjs';
-import { find, mergeMap, pluck, take, tap, withLatestFrom } from 'rxjs/operators';
+import { BehaviorSubject, of } from 'rxjs';
+import { catchError, find, mergeMap, pluck, take, tap, withLatestFrom } from 'rxjs/operators';
 import { Character, DataResponse, Episode } from '../interfaces/data.interface';
 
 import { LocalStorageService } from '@shared/services/localStorage.service';
@@ -74,7 +74,51 @@ export class DataService {
 
   }
 
-  private getDataAPI(): void {
+
+  filterData(valueToSearch: string): void {
+    //
+    const QUERY_BY_NAME = gql`
+    query ($name:String) {
+      characters(filter: {name: $name}){
+        info{
+          count
+        }
+      results {
+        id
+        name
+        status
+        species
+        gender
+        image
+    }
+      }
+    }` ;
+
+
+
+
+    this.apollo.watchQuery<any>(
+      {
+        query: QUERY_BY_NAME,
+        variables: {
+          name: valueToSearch
+        }
+      }).valueChanges
+      .pipe(
+        take(1),
+        pluck('data', 'characters'),
+        tap((apiResponse) => this.parseCharactersData([...apiResponse.results])),
+        catchError(error => {
+          console.log(error.message);
+          this.charactersSubject.next(null);
+          return of(error);
+        })
+      )
+      .subscribe();
+
+  }
+
+  getDataAPI(): void {
     this.apollo.watchQuery<DataResponse>({
       query: QUERY
     }).valueChanges.pipe(
