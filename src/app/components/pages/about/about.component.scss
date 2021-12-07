@@ -1,0 +1,16 @@
+section {
+  height: 90vh;
+  padding: 0;
+  margin: 0;
+}
+section.about__page {
+  margin-top: 2rem;
+
+  .about__container {
+    display: flex;
+    margin-top: 1.5rem;
+  }
+  .about__copy {
+    text-align: end;
+  }
+}
