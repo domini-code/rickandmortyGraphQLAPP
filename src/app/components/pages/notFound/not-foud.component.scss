@@ -1,0 +1,117 @@
+.not-found {
+  width: 560px;
+  height: 225px;
+  margin-right: 100px;
+  position: absolute;
+  top: 32%;
+  left: 60%;
+  margin-top: -236px;
+  margin-left: -400px;
+}
+
+.svg1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -250px;
+  margin-left: -400px;
+  z-index: -1;
+}
+
+.notfound-copy {
+  color: #fff;
+  position: fixed;
+  top: 296px;
+  right: 22%;
+  text-align: right;
+}
+h1 {
+  font-weight: 700;
+  font-size: 45px;
+}
+a {
+  font-weight: 300;
+  color: #fff;
+  font-size: 1.5rem;
+  border-bottom: 1.5px solid #5581d4;
+  text-decoration: none;
+}
+a:hover {
+  font-weight: 300;
+  color: #fff;
+  border-bottom: 2px solid #fff;
+  text-decoration: none;
+}
+
+#Polygon-1,
+#Polygon-2,
+#Polygon-3,
+#Polygon-4,
+#Polygon-4,
+#Polygon-5 {
+  -webkit-animation: float 1s infinite ease-in-out alternate;
+  animation: float 1s infinite ease-in-out alternate;
+}
+#Polygon-2 {
+  -webkit-animation-delay: 0.2s;
+  animation-delay: 0.2s;
+}
+#Polygon-3 {
+  -webkit-animation-delay: 0.4s;
+  animation-delay: 0.4s;
+}
+#Polygon-4 {
+  -webkit-animation-delay: 0.6s;
+  animation-delay: 0.6s;
+}
+#Polygon-5 {
+  -webkit-animation-delay: 0.8s;
+  animation-delay: 0.8s;
+}
+
+@-webkit-keyframes float {
+  100% {
+    -webkit-transform: translateY(20px);
+    transform: translateY(20px);
+  }
+}
+
+@keyframes float {
+  100% {
+    -webkit-transform: translateY(20px);
+    transform: translateY(20px);
+  }
+}
+
+@media (max-width: 450px) {
+  .svg1 {
+    position: absolute;
+    top: 71%;
+    left: 61%;
+    width: 290px;
+    margin-top: -250px;
+    margin-left: -190px;
+    z-index: -1;
+  }
+
+  .not-found {
+    position: absolute;
+    top: 30%;
+    left: 8%;
+    width: 558px;
+    margin-top: -250px;
+    margin-left: -240px;
+  }
+  .notfound-copy {
+    top: 26%;
+    margin-top: -1px;
+  }
+
+  #h1 {
+    font-size: 35px;
+  }
+
+  .notfound-copy ul li a {
+    font-size: 1rem;
+  }
+}
